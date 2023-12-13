@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import './App.css'
+import Navigation from './components/Navigation';
 
 function App() {
     const { data: helloWorld } = useQuery({
@@ -8,11 +9,8 @@ function App() {
     });
 
     return (
-        <>
-            <div className="rounded-lg px-3 py-2 bg-red-100"> 
-                { helloWorld }
-            </div> 
-        </>
+    <div>
+    </div>
     )
 }
 
