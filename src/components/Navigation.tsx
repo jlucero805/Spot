@@ -15,6 +15,7 @@ export interface NavigationProps {
     back?: Maybe<string>,
     page: NavigationPage,
     content: ReactElement,
+    hideBottomNav?: boolean,
 }
 
 export default function Navigation(props: NavigationProps) {
@@ -30,28 +31,32 @@ export default function Navigation(props: NavigationProps) {
                 Spot
             </p>
         </div>
-        <div className="flex-1 w-screen overflow-auto max-h-[calc(100%)]">
+        <div className="flex-1 w-screen overflow-auto max-h-[calc(100%)] relative">
             { props.content }
         </div>
-        <div className="bg-white flex p-2 justify-between gap-3">
-            <div
-                className={`py-2 w-1/3 rounded-3xl flex justify-center ${props.page === NavigationPage.FIND ? "bg-secondary-100" : "bg-white"}`}
-                onClick={navigateToFind}
-            >
-                <img src={locationIcon} className="w-10"/>
+        {
+            props.hideBottomNav
+            ? null
+            : <div className="bg-white flex p-2 justify-between gap-3">
+                <div
+                    className={`py-2 w-1/3 rounded-3xl flex justify-center ${props.page === NavigationPage.FIND ? "bg-secondary-100" : "bg-white"}`}
+                    onClick={navigateToFind}
+                >
+                    <img src={locationIcon} className="w-10"/>
+                </div>
+                <div
+                    className={`py-2 w-1/3 rounded-3xl flex justify-center ${props.page === NavigationPage.RESERVE ? "bg-secondary-100" : "bg-white"}`}
+                    onClick={navigateToReserve}
+                >
+                    <img src={walletIcon} className="w-10"/>
+                </div>
+                <div
+                    className={`py-2 w-1/3 rounded-3xl flex justify-center ${props.page === NavigationPage.PROFILE ? "bg-secondary-100" : "bg-white"}`}
+                    onClick={navigateToProfile}
+                >
+                    <img src={userIcon} className="w-10"/>
+                </div>
             </div>
-            <div
-                className={`py-2 w-1/3 rounded-3xl flex justify-center ${props.page === NavigationPage.RESERVE ? "bg-secondary-100" : "bg-white"}`}
-                onClick={navigateToReserve}
-            >
-                <img src={walletIcon} className="w-10"/>
-            </div>
-            <div
-                className={`py-2 w-1/3 rounded-3xl flex justify-center ${props.page === NavigationPage.PROFILE ? "bg-secondary-100" : "bg-white"}`}
-                onClick={navigateToProfile}
-            >
-                <img src={userIcon} className="w-10"/>
-            </div>
-        </div>
+        }
     </div> 
 }

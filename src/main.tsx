@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Navigation, { NavigationPage } from './components/Navigation.tsx'
 import Find from './components/Find.tsx'
+import Reserve from './components/Reserve.tsx'
 
 const router = createBrowserRouter([
     {
@@ -18,8 +19,20 @@ const router = createBrowserRouter([
         element: <Navigation page={NavigationPage.FIND}  content={<Find />}/>,
     },
     {
+        path: "/property",
+        element: <Navigation
+            page={NavigationPage.RESERVE}
+            content={<Reserve />}
+            hideBottomNav={true}
+        />
+    },
+    {
         path: "/reserve",
-        element: <Navigation page={NavigationPage.RESERVE} content={<div>hi</div>}/>,
+        element: <Navigation
+            page={NavigationPage.RESERVE} 
+            content={<div>
+            </div>}
+        />,
     },
     {
         path: "/profile",

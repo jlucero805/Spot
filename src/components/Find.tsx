@@ -44,6 +44,17 @@ export default function Find() {
 
     const getFindBy = () => searchParams.get("findBy");
 
+    const propertyClickHandler = (id: string) => {
+        console.log("id of Object");
+        console.log(id);
+        navigate({
+            pathname: "/property",
+            search: createSearchParams({
+                id: id,
+            }).toString(),
+        });
+    };
+
     return <>
         {
             getFindBy() === "map"
@@ -76,7 +87,7 @@ export default function Find() {
                 <div className="flex flex-col gap-2 w-11/12 shadow-md border border-opacity-5 rounded-lg min-h-screen p-3">
                     {
                         !!locations
-                        ? locations.map((location) => <div key={location.id} className="border-2 rounded-xl border-primary-100 flex items-center">
+                        ? locations.map((location) => <div onClick={() => propertyClickHandler(location._id)} key={location._id} className="border-2 rounded-xl border-primary-100 flex items-center">
                             <div className="flex flex-col flex-1 w-[100%] justify-center px-5 gap-2 py-3">
                                 <div className="flex flex-col gap-0">
                                     <p className="font-bold text-xl text-primary-100 p-0 m-0">
@@ -88,7 +99,7 @@ export default function Find() {
                                 </div>
                                 <Stars count={location.stars}/>
                             </div>
-                            <img src={location.mapImage} className="aspect-square rounded-xl h-24"/>
+                            <img src={location.propertyImage} className="aspect-square rounded-xl h-24"/>
                         </div>)
                         : null
                     }
