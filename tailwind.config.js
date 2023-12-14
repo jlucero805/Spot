@@ -14,6 +14,9 @@ export default {
                 100: "#FFB800",
             },
         },
+        fontFamily: {
+            quicksand: ["Quicksand"],
+        },
     },
   },
   plugins: [],
