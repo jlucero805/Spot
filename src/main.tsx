@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { createContext, useState } from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
 import './index.css'
 import '@tanstack/react-query'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -42,10 +41,26 @@ const router = createBrowserRouter([
 
 const queryClient = new QueryClient();
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-     <QueryClientProvider client={queryClient}> 
-        <RouterProvider router={router} />
-     </QueryClientProvider> 
-  </React.StrictMode>,
-)
+const StateContext = createContext({});
+
+function App() {
+    const [location, setLocation] = useState<string>("");
+    const [startDate, setStartDate] = useState<string>("");
+    const [endDate, setEndDate] = useState<string>("");
+    
+    return (
+        <React.StrictMode>
+            <StateContext.Provider value={{
+                location, setLocation,
+                startDate, setStartDate,
+                endDate, setEndDate,
+            }}>
+                 <QueryClientProvider client={queryClient}> 
+                    <RouterProvider router={router} />
+                 </QueryClientProvider> 
+            </StateContext.Provider>
+        </React.StrictMode>
+    )
+}
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<App/>)
